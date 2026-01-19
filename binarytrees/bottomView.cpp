@@ -42,13 +42,7 @@ void topView(Node* root) {
 
         Node* currNode = curr.first;
         int hd = curr.second;
-
-         
-              m[hd] = currNode->data;
-          
-          
-        
-
+        m[hd] = currNode->data;  
         if(currNode->left) {
             pair<Node*, int> left = make_pair(currNode->left, hd-1);
             Q.push(left);

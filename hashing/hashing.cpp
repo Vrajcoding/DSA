@@ -50,6 +50,7 @@ class HashTable
         int oldTotal = totalSize;
 
         totalSize = totalSize * 2;
+        currSize = 0;
         table = new Node *[totalSize];
 
         for (int i = 0; i < totalSize; i++)
@@ -136,6 +137,41 @@ public:
 
         return -1;
     }
+
+    void remove(string key) {
+        int idx = hashfunction(key);
+
+        Node* temp = table[idx];
+        Node* prev = temp;
+
+        while(temp != NULL) {
+            if(temp->key == key) {
+                if(temp == prev) {
+                   table[idx]= temp->next;
+                } else {
+                  prev->next = temp->next;
+                }
+                break;
+            }
+
+            prev = temp;
+            temp = temp->next;  
+        }
+    }
+
+    void print() {
+
+        for(int i = 0;i < totalSize;i++) {
+            cout << "idx" << i << "->";
+            Node* temp = table[i];
+            while (temp != NULL)
+            {
+                cout << "(" << temp->key << "," << temp->val << ") ->";
+                temp = temp->next;
+            }
+            cout << endl;
+        }
+    }
 };
 
 int main()
@@ -148,11 +184,10 @@ int main()
     ht.insert("np", 50);
     ht.insert("jp", 10);
 
-    if(ht.exists("in")) {
-        cout << "India" << "=" << ht.search("in") << endl;
-    } else {
-        cout << "doest exits";
-    }
+    ht.remove("in");
+    ht.print();
+
+    
 
     return 0;
 }
