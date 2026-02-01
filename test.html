@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admission Form</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <style>
+        .error {
+            color: brown;
+            margin-left: 10px;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+
+    <form id="nameform">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name">
+        <span class="error" id="nameerror"></span>
+        <br><br>
+
+        <label for="email">Email:</label>
+        <input type="text" id="email" name="email">
+        <span class="error" id="emailerror"></span>
+        <br><br>
+
+        <label for="number">Number:</label>
+        <input type="text" id="number" name="number">
+        <span class="error" id="numbererror"></span>
+        <br><br>
+        
+        <label for="course">Course:</label>
+        <select id="course">
+            <option value="">Select</option>
+            <option value="bca">BCA</option>
+            <option value="bba">BBA</option>
+            <option value="mca">MCA</option>
+        </select>
+        <br><br>
+
+        <input type="button" id="vp" value="Submit">
+    </form>
+
+    <script>
+        $(document).ready(function(){
+            $("#vp").click(function(){
+                var name = $("#name").val();
+                var nameRegex = /^[a-zA-Z\s]+$/; 
+                
+                if(nameRegex.test(name)){
+                    $("#nameerror").text("");
+                } else {
+                    $("#nameerror").text("Invalid name. Please use only letters and space.");
+                    $("#nameerror").css("color", "red");
+                }
+                var email = $("#email").val();
+                var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                
+                if(emailRegex.test(email)){
+                    $("#emailerror").text("");
+                } else {
+                    $("#emailerror").text("Invalid email.");
+                    $("#emailerror").css("color", "red");
+                }
+
+                var number = $("#number").val();
+                var numberRegex = /^[0-9]{10}$/;
+                
+                if(numberRegex.test(number)){
+                    $("#numbererror").text("");
+                } else {
+                    $("#numbererror").text("Invalid number. Please enter 10 digits.");
+                    $("#numbererror").css("color", "red");
+                }
+                
+                if(nameRegex.test(name) && emailRegex.test(email) && numberRegex.test(number))
+                 {
+                    $("#name").val("");
+                    $("#email").val("");
+                    $("#number").val("");
+                    $("#course").val("");
+                    alert("Form Submitted Successfully!");
+                   
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>
